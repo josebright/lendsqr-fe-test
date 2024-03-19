@@ -1,0 +1,14 @@
+{
+    "loginPage": {
+      "title": "Welcome!",
+      "subTitle": "Enter details to login.",
+      "forgotPass": "Forgot PASSWORD?",
+      "submitButtonText": "LOG IN"
+    },
+    "dashboardPage": {
+      "search": "Search for anything",
+      "user": "Users",
+      "doc": "Docs"
+    }
+}
+  

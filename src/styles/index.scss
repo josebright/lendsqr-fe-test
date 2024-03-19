@@ -1,0 +1,115 @@
+// Font & Base Styles
+$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+$font-size-base: 14px;
+
+// Color Themes
+$color-main: #545F7D;
+$color-primary: #39CDCC;
+$color-secondary: #213F7D;
+$color-warning: #E9B200;
+$color-success: #39CD62;
+$color-danger: #E4033B;
+$colors-others: (
+  'gold': #E9B200,
+  'pink': #FF3366,
+  'orange': #F55F44,
+  'purple': #5718FF,
+  'magenta': #DF18FF,
+);
+
+// Screen Sizes for Responsive Design
+$screen-xs: 480px;
+$screen-sm: 768px;
+$screen-md: 992px;
+$screen-lg: 1200px;
+$screen-xl: 1400px;
+
+// Base Styles
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  color: $color-main;
+}
+
+// Utility Classes for Colors
+.text-primary { color: $color-primary; }
+.text-secondary { color: $color-secondary; }
+.text-warning { color: $color-warning; }
+.text-success { color: $color-success; }
+.text-danger { color: $color-danger; }
+
+// Iterate over other colors to generate utility classes
+@each $name, $color in $colors-others {
+  .text-#{$name} { color: $color; }
+}
+
+// Media Queries for Responsive Design
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $screen-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: $screen-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $screen-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $screen-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (min-width: $screen-xl) { @content; }
+  }
+}
+
+.container {
+  @include respond-to(md) {
+    padding: 0 15px;
+  }
+
+  @include respond-to(xl) {
+    max-width: 1200px;
+    margin: auto;
+  }
+}
+
+
+// Input styling
+.input-container {
+  position: relative;
+  display: inline-block;
+
+  // &.dropdown {
+  //   // Additional  styles if needed
+  // }
+
+  .input-field {
+    height: 50px;
+    border-radius: 5px;
+    border: 2px solid rgba($color-main, 0.15);
+    color: $color-main;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    &::placeholder {
+      color: rgba($color-main, 0.6);
+    }
+
+    &:focus {
+      border-color: rgba($color-main, 0.4);
+      outline: none;
+    }
+
+    &.password {
+      padding-right: 60px;
+    }
+  }
+
+  .toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    outline: none;
+    transform: translateY(-50%);
+    height: 30px;
+    color: $color-primary;
+    background-color: transparent;
+    border: 0;
+  }
+}
