@@ -1,46 +1,52 @@
-# Getting Started with Create React App
+# Lendsqr Frontend Engineer Assessment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+This project is a React-based web application designed to provide a dynamic user interface with responsive design and accessibility features. It includes a login system and a dashboard for displaying user data.
 
-In the project directory, you can run:
+### Key Features
 
-### `npm start`
+- **Login System**: Secure authentication mechanism allowing users to access the dashboard.
+- **Dashboard**: A central hub for users to view and interact with their data.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Technology Stack
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **React**: Utilized for building the user interface with functional components and hooks for state management.
+- **TypeScript**: Provides type safety across the application, enhancing code quality and maintainability.
+- **SCSS**: Used for styling, leveraging features like variables and mixins for a consistent and maintainable stylesheet.
+- **React Router**: Manages routing within the application, enabling navigation between the login page and dashboard.
+- **ESLint**: Ensures code quality and consistency through static analysis.
+- **Mirage JS**: Simulates an API backend for development and testing purposes, allowing for realistic data interactions without the need for an actual backend.
+- **JSON Generator**: To generate static data for APIs.
 
-### `npm test`
+## Getting Started
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+Before you begin, ensure you have the following installed:
+- Node.js (LTS version recommended)
+- npm (comes with Node.js) or Yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone the repository:
+```sh
+git clone https://github.com/josebright/lendsqr-fe-test.git
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Navigate to the project directory:
+```sh
+cd lendsqr-fe-test
+```
 
-### `npm run eject`
+3. Install dependencies:
+```sh
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+4. Running the Project Locally:
+```sh
+npm start
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+#### This will launch the application in your default web browser at http://localhost:3000.
