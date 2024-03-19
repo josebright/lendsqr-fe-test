@@ -6,8 +6,8 @@ This project is a React-based web application designed to provide a dynamic user
 
 ### Key Features
 
-- **Login System**: Secure authentication mechanism allowing users to access the dashboard.
-- **Dashboard**: A central hub for users to view and interact with their data.
+- **Login Screen**: Authentication mechanism allowing users to access the dashboard.
+- **Dashboard Screen**: A central hub for users to view and interact with their data.
 
 ## Technology Stack
 
