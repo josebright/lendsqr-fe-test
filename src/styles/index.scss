@@ -14,6 +14,7 @@ $color-warning: #E9B200;
 $color-success: #39CD62;
 $color-danger: #E4033B;
 $color-white: #FFFFFF;
+$color-off-white: #FBFBFB;
 $colors-others: (
   'gold': #E9B200,
   'pink': #FF3366,
@@ -94,6 +95,14 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
+
+  @include respond-to(md) {
+    height: 90vh;
+  }
+
+  @include respond-to(xs) {
+    padding: 20px;
+  }
 }
 
 h1 {
@@ -201,6 +210,28 @@ h3 {
 
   &:hover {
     text-decoration: underline;
+  }
+}
+
+.left-grid {
+  background-color: $color-off-white;
+
+  img:first-of-type {
+    padding-left: 20px;
+  }
+
+  @include respond-to(md) {
+    background-color: $color-white;
+    padding-top: 20px;
+    height: 10vh;
+  }
+
+  @include respond-to(xs) {
+    padding-left: 0;
+  
+    img:nth-of-type(2) {
+      display: none;
+    }
   }
 }
 

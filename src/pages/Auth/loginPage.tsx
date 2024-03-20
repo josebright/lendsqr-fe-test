@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Grid } from '@mui/material'
 import Logo from '../../utils/Assests/logo.svg'
 import OnBoardingImage from '../../utils/Assests/pablo-sign-in 1.svg'
@@ -10,28 +11,26 @@ import Spacer from '../../components/Templates/spacerComponent'
 import TextButton from '../../components/Templates/textButtonComponent'
 import ErrorComponent from '../../components/Templates/errorComponent'
 import AlertBar from '../../components/Templates/alertBarComponent'
+import { authenticateUser } from '../../api/auth'
 
 interface Props {
   onLogin: (isLoggedIn: boolean) => void
 }
 
 interface FormValues {
-  username: string
+  email: string
   password: string
 }
 
 const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
   const [alert, setAlert] = useState<{ message: string, type: 'success' | 'error' | '' }>({ message: '', type: '' })
   const [showAlert, setShowAlert] = useState<boolean>(false)
-
-  const closeAlert = (): void => {
-    setShowAlert(false)
-  }
+  const navigate = useNavigate()
 
   return (
     <div className='container'>
       <Grid container className='centered-flex'>
-        <Grid item xs={0} md={6} className='vertically-centered-flex'>
+        <Grid item xs={0} md={6} className='vertically-centered-flex left-grid'>
           <Grid>
             <Spacer height='5%' />
             <img src={Logo} alt="Logo" height='36px' width='173.76px' />
@@ -41,10 +40,12 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
         </Grid>
         <Grid item xs={12} md={6} className='vertically-centered-flex'>
           <Formik
-            initialValues={{ username: '', password: '' }}
-            onSubmit={(values, { setSubmitting }): void => {
-              if (values.username === 'user' && values.password === 'pass') {
+            initialValues={{ email: '', password: '' }}
+            onSubmit={async (values, { setSubmitting }) => {
+              const user = await authenticateUser(values.email, values.password)
+              if (user) {
                 onLogin(true)
+                navigate('/dashboard')
               } else {
                 setAlert({ message: 'Incorrect Email or Password.', type: 'error' })
                 setShowAlert(true)
@@ -53,8 +54,8 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
             }}
             validate={(values): Partial<FormValues> => {
               const errors: Partial<FormValues> = {}
-              if (!values.username) errors.username = 'Email is required'
-              if (!values.password) errors.password = 'Password is required'
+              if (values.email === '') errors.email = 'Email is required'
+              if (values.password === '') errors.password = 'Password is required'
               return errors
             }}
           >
@@ -65,7 +66,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
                 <Spacer height='3rem' />
                 <Form>
                   <Field
-                    name="username"
+                    name="email"
                     component={InputComponent}
                     width='94%'
                     type='text'
@@ -73,7 +74,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {touched.username && errors.username && <ErrorComponent errorMessage={errors.username} />}
+                  {touched.email && errors.email && <ErrorComponent errorMessage={errors.email} />}
                   <Spacer height='1rem' />
                   <Field
                     name="password"
@@ -95,7 +96,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
           </Formik>
         </Grid>
       </Grid>
-      {showAlert === true && alert.type !== '' && <AlertBar message={alert.message} type={alert.type} onClose={closeAlert} />}
+      {showAlert && alert.type !== '' && <AlertBar message={alert.message} type={alert.type} onClose={() => { setShowAlert(false) }} />}
     </div>
   )
 }

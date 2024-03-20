@@ -1,17 +1,24 @@
-import { createServer, Model, Server } from 'miragejs'
-import data from '../utils/MockAPIs/users.json'
+import { createServer, Model } from 'miragejs'
+import data from '../utils/MockAPIs/database.json'
 
-export function makeServer (): void {
+export function makeServer ({ environment = 'development' } = {}): void {
   createServer({
+    environment,
     models: {
       user: Model
+    },
+
+    seeds (server) {
+      server.db.loadData({
+        users: data
+      })
     },
 
     routes () {
       this.namespace = 'api'
 
-      this.get('/users', () => {
-        return data
+      this.get('/users', (schema) => {
+        return schema.db.users
       })
     }
   })

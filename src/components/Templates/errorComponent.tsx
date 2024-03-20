@@ -5,7 +5,7 @@ interface ErrorComponentProps {
 }
 
 const ErrorComponent: React.FC<ErrorComponentProps> = ({ errorMessage }) => {
-  if (!errorMessage) return null
+  if (errorMessage == null || errorMessage.trim() === '') return null
 
   return (
     <div className="error-message">
