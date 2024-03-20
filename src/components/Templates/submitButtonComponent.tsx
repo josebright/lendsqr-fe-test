@@ -1,22 +1,23 @@
 import React from 'react'
 
 interface SubmitButtonProps {
-  type: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary'
   width: string
   buttonText: string
   color?: string
   disabled?: boolean
 }
 
-const SubmitButtonComponent: React.FC<SubmitButtonProps> = ({ type, width, buttonText, color, disabled }): JSX.Element => {
+const SubmitButtonComponent: React.FC<SubmitButtonProps> = ({ variant, width, buttonText, color, disabled }): JSX.Element => {
   return (
     <button
-      className={`submit-button ${type} ${disabled}`}
+      className={`submit-button ${variant} ${disabled}`}
       disabled={disabled}
+      type="submit"
       style={{
         width,
-        color: type === 'secondary' ? color : '',
-        borderColor: type === 'secondary' ? color : ''
+        color: variant === 'secondary' ? color : '',
+        borderColor: variant === 'secondary' ? color : ''
       }}
     >
       {buttonText}
