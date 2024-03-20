@@ -2,7 +2,7 @@
     "loginPage": {
       "title": "Welcome!",
       "subTitle": "Enter details to login.",
-      "forgotPass": "Forgot PASSWORD?",
+      "forgotPass": "FORGOT PASSWORD?",
       "submitButtonText": "LOG IN"
     },
     "dashboardPage": {
