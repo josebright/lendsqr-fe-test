@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { makeServer } from './api/server'
 import LoginPage from './pages/Auth/loginPage'
 import DashboardPage from './pages/Dashboard'
+import NotFoundPage from './pages/NotFoundPage'
 
 declare const process: {
   env: {
@@ -32,6 +33,7 @@ const App: React.FC = (): JSX.Element => {
         />
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/dashboard" element={isLoggedIn ? <DashboardPage /> : <Navigate replace to="/login" />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   )

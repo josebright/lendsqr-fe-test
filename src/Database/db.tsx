@@ -7,7 +7,7 @@ class MyAppDatabase extends Dexie {
   constructor () {
     super('MyAppDatabase')
     this.version(1).stores({
-      users: 'id, index, guid, fullName, email, password, address, users'
+      users: 'id, index, guid, fullName, email, password, address, customers'
     })
     this.users = this.table('users')
   }
