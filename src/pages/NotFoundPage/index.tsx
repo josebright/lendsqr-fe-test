@@ -1,6 +1,6 @@
 import React from 'react'
-import TextButton from '../../components/Templates/textButtonComponent'
-import Spacer from '../../components/Templates/spacerComponent'
+import TextButton from '../../components/Templates/TextButtonComponent'
+import Spacer from '../../components/Templates/SpacerComponent'
 
 const NotFoundPage: React.FC = () => {
   return (
