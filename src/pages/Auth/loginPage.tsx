@@ -43,7 +43,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
             initialValues={{ email: '', password: '' }}
             onSubmit={async (values, { setSubmitting }) => {
               const user = await authenticateUser(values.email, values.password)
-              if (user) {
+              if (user !== null && user !== undefined) {
                 onLogin(true)
                 navigate('/dashboard')
               } else {
@@ -74,7 +74,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {touched.email && errors.email && <ErrorComponent errorMessage={errors.email} />}
+                  {touched.email === true && errors.email != null && errors.email !== '' && <ErrorComponent errorMessage={errors.email} />}
                   <Spacer height='1rem' />
                   <Field
                     name="password"
@@ -85,7 +85,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {touched.password && errors.password && <ErrorComponent errorMessage={errors.password} />}
+                  {touched.password === true && errors.password != null && errors.password !== '' && <ErrorComponent errorMessage={errors.password} />}
                   <Spacer height='1rem' />
                   <TextButton text={TextData.loginPage.forgotPass} href='#' />
                   <Spacer height='2rem' />

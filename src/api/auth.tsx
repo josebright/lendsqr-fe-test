@@ -4,7 +4,7 @@ import db from '../Database/db'
 export const authenticateUser = async (email: string, password: string): Promise<IUser | undefined> => {
   let user = await db.users.where({ email, password }).first()
 
-  if (!user) {
+  if (user === undefined || user === null) {
     const response = await fetch(`/api/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`)
 
     if (response.ok) {
@@ -16,7 +16,7 @@ export const authenticateUser = async (email: string, password: string): Promise
         specificUser = potentialUsers
       }
 
-      if (specificUser) {
+      if (specificUser !== null && specificUser !== undefined) {
         user = specificUser
         await db.users.add(user)
       }

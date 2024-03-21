@@ -15,5 +15,11 @@
         "react"
     ],
     "rules": {
-    }
+        "@typescript-eslint/triple-slash-reference": ["error", { "path": "never", "types": "always", "lib": "always" }]
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+  }
 }
