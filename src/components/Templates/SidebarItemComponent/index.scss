@@ -1,0 +1,50 @@
+@import "../../../styles/index.scss";
+
+.item-icon {
+  color: rgba($color-secondary, 0.6);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.item-text {
+  transition: background-color 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+  // padding-left: 1rem;
+  overflow-x: hidden;
+  white-space: nowrap;
+  color: rgba($color-secondary, 0.6);
+  font-weight: 400;
+
+  @include respond-to(sm) {
+    display: none;
+  }
+}
+
+.item {
+  overflow-x: hidden;
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  &.active {
+    background-color: rgba($color-primary, 0.6);;
+    border-left: 3px solid;
+    padding-left: 13px;
+    color: $color-secondary;
+    border-color: rgba($color-primary, 0.6);;
+
+    .MuiListItemIcon-root {
+      color: $color-secondary;
+    }
+  }
+}
+
+.styled-link {
+  text-decoration: none;
+}
+
+h6 {
+  font-size: 12px;
+  font-weight: 400;
+  color: $color-secondary;
+  padding-left: 30px;
+}
