@@ -1,0 +1,56 @@
+@import "../../../styles/index.scss";
+
+.search-textfield {
+
+    .MuiOutlinedInput-root {
+        height: 40px;
+        width: 400px;
+        border-radius: 8px;
+        color: rgba($color-main, 0.6);
+        align-items: center;
+
+        input {
+            padding: 10px 14px;
+        }
+
+        fieldset {
+            border: 1px solid rgba($color-secondary, 0.2);
+        }
+
+        &:hover fieldset {
+            border-color: rgba($color-secondary, 0.3);
+          }
+      
+          &.Mui-focused fieldset {
+            border-color: rgba($color-secondary, 0.2);
+          }
+    
+        .MuiInputAdornment-positionEnd {
+            .searc-Icon {
+                height: 40px;
+                width: 56px;
+                background-color: $color-primary;
+                color: white;
+                margin-right: -14px;
+                border-radius: 0 8px 8px 0;
+
+                &:hover {
+                    background-color: darken($color-primary, 10%);
+                }
+            }
+        }
+    }
+
+    .MuiInputLabel-outlined {
+        color: rgba($color-main, 0.6);
+ 
+        transform: translate(14px, 40%) scale(1);
+        top: 0;
+    
+        &.Mui-focused {
+            color: rgba($color-main, 0.6);
+            transform: translate(14px, -50%) scale(0.75);
+        }
+      }
+  }
+  

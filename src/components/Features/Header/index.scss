@@ -1,27 +1,44 @@
+@import "../../../styles/index.scss";
+
 .header {
     display: flex;
     height: 100px;
     align-items: center;
-    background-color: #ffffff;
+    background-color: $color-white;
     box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
     position: relative;
-    z-index:2000;
+    z-index: 1500;
   
     .header-section {
       flex: 1;
+      align-items: center;
   
       &:first-child {
         flex: 1;
+        height: 30px;
+        justify-content: flex-start;
+        padding-left: 30px;
       }
   
       &:nth-child(2) {
         flex: 2;
+        justify-content: center;
       }
   
       &:last-child {
         flex: 1;
         display: flex;
-        justify-content: flex-end;
+        justify-content: flex-start;
+      }
+
+      @include respond-to(xs) {
+        &:first-child {
+            padding-left: 10px;
+        }
+
+        &:nth-child(2) {
+            display: none;
+        }
       }
     }
   }

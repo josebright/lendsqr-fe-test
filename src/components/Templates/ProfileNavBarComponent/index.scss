@@ -1,0 +1,53 @@
+@import "../../../styles/index.scss";
+
+.profile-nav-bar {
+    color: $color-secondary;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.profile-text-button {
+    font-family: 'Roboto';
+    font-weight: 400;
+    font-size: 16px;
+    color: $color-secondary;
+    margin-right: 10px;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+.icon-button .icon {
+    color: $color-secondary;
+    height: 26px;
+    width: 26px;
+}
+
+.avatar {
+    height: 48px;
+    width: 48px;
+    margin-left: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.user-name {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+
+    .icon {
+        color: $color-secondary;
+    }
+}
+
+.menu {
+    z-index: 2000;
+    cursor: pointer;
+}
+  

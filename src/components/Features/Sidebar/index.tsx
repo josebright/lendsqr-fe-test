@@ -9,7 +9,7 @@ const Sidebar: React.FC = () => {
   return (
     <Drawer className='styled-drawer' variant="permanent" anchor="left">
         <List>
-            <Spacer height='7rem' />
+            <Spacer height='1rem' />
             <SidebarItem
                 text="Switch Organization"
                 icon="briefcase-1.svg"
@@ -59,7 +59,9 @@ const Sidebar: React.FC = () => {
             ))}
             <Spacer height='2rem' />
         </List>
+
         <Divider />
+
         <List>
             <SidebarItem
                 text="Logout"
@@ -67,6 +69,7 @@ const Sidebar: React.FC = () => {
                 link="#"
             />
             <h6>v1.2.0</h6>
+            <Spacer height='6rem' />
         </List>
     </Drawer>
   )

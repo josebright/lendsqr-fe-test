@@ -1,6 +1,8 @@
 import React from 'react'
-import { Avatar, IconButton, Menu, MenuItem } from '@mui/material'
+import { Avatar, IconButton, Menu } from '@mui/material'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
+import './index.scss'
 
 const ProfileNavBar: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
@@ -15,23 +17,27 @@ const ProfileNavBar: React.FC = () => {
   }
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-      <IconButton>
-        <NotificationsNoneIcon />
-      </IconButton>
-      <Avatar alt="User Name" src="/path/to/user/avatar.jpg" />
-      <span>User Name</span>
-      <IconButton onClick={handleClick}>
-        <Avatar alt="User Name" src="/path/to/user/avatar.jpg" /> {/* For dropdown icon */}
-      </IconButton>
-      <Menu
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-      >
-        <MenuItem onClick={handleClose}>Profile</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem>
-      </Menu>
+    <div className="profile-nav-bar">
+        <a className="profile-text-button" href='#'>
+            Docs
+        </a>
+        <IconButton className="icon-button">
+            <NotificationsNoneIcon className="icon" />
+        </IconButton>
+        <Avatar alt="User Name" src="/path/to/user/avatar.jpg" className="avatar" />
+        <span className="user-name" onClick={handleClick}>
+            User Name
+            <ArrowDropDownIcon className="icon" />
+        </span>
+        <Menu
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleClose}
+            className="menu"
+        >
+            {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
+            <MenuItem onClick={handleClose}>Logout</MenuItem> */}
+        </Menu>
     </div>
   )
 }
