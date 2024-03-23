@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { ListItem, ListItemIcon, ListItemText } from '@mui/material'
 import './index.scss'
 
@@ -25,14 +26,14 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ text, icon, link }) => {
   }, [icon])
 
   return (
-    <a href={link} className="styled-link">
+    <Link to={link} className="styled-link">
       <ListItem button key={text} className="item">
         <ListItemIcon className="item-icon">
           {(iconSrc.length > 0) ? <img src={iconSrc} alt={text} width='18px' /> : null}
         </ListItemIcon>
         <ListItemText primary={text} className="item-text" />
       </ListItem>
-    </a>
+    </Link>
   )
 }
 

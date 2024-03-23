@@ -1,6 +1,7 @@
 import React from 'react'
 import { TextField, InputAdornment, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
+import TextData from '../../../utils/TextData/staticTexts.json'
 import './index.scss'
 
 const SearchBar: React.FC = () => {
@@ -8,7 +9,7 @@ const SearchBar: React.FC = () => {
     <TextField
       fullWidth
       type="search"
-      label="Search for anything"
+      label={TextData.usersPage.search}
       variant="outlined"
       InputProps={{
         endAdornment: (

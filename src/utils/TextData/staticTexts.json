@@ -5,10 +5,9 @@
       "forgotPass": "FORGOT PASSWORD?",
       "submitButtonText": "LOG IN"
     },
-    "dashboardPage": {
+    "usersPage": {
       "search": "Search for anything",
-      "user": "Users",
-      "doc": "Docs"
+      "user": "Users"
     }
 }
   

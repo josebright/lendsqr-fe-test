@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import { makeServer } from './api/server'
 import LoginPage from './pages/Auth/loginPage'
-import DashboardPage from './pages/Dashboard'
+import UsersPage from './pages/Users'
 import NotFoundPage from './pages/NotFoundPage'
 
 declare const process: {
@@ -29,10 +29,10 @@ const App: React.FC = (): JSX.Element => {
       <Routes>
         <Route
           path="/"
-          element={<Navigate replace to={isLoggedIn ? '/dashboard' : '/login'} />}
+          element={<Navigate replace to={isLoggedIn ? '/users' : '/login'} />}
         />
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/dashboard" element={isLoggedIn ? <DashboardPage /> : <Navigate replace to="/login" />} />
+        <Route path="/users" element={isLoggedIn ? <UsersPage /> : <Navigate replace to="/login" />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>

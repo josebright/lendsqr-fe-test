@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 interface TextButtonProps {
   text: string
@@ -7,9 +8,9 @@ interface TextButtonProps {
 
 const TextButton: React.FC<TextButtonProps> = ({ text, href }) => {
   return (
-    <a className="text-button" href={href}>
+    <Link className="text-button" to={href}>
       {text}
-    </a>
+    </Link>
   )
 }
 

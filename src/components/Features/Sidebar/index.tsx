@@ -9,7 +9,7 @@ const Sidebar: React.FC = () => {
   return (
     <Drawer className='styled-drawer' variant="permanent" anchor="left">
         <List>
-            <Spacer height='1rem' />
+            <Spacer height='3rem' />
             <SidebarItem
                 text="Switch Organization"
                 icon="briefcase-1.svg"

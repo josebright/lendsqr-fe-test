@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { Avatar, IconButton, Menu } from '@mui/material'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
@@ -18,9 +19,9 @@ const ProfileNavBar: React.FC = () => {
 
   return (
     <div className="profile-nav-bar">
-        <a className="profile-text-button" href='#'>
+        <Link className="profile-text-button" to='#'>
             Docs
-        </a>
+        </Link>
         <IconButton className="icon-button">
             <NotificationsNoneIcon className="icon" />
         </IconButton>
