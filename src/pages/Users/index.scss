@@ -76,5 +76,32 @@ h3 {
     width: 180px !important;
     border-radius: 4px !important;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04) !important;
+}
+
+.material-table {
+    .MuiTablePagination-selectLabel {
+        font-size: 14px;
+        color: $color-main;
+    }
+
+    .MuiTablePagination-displayedRows {
+        display: none;
+    }
+
+    .MuiTypography-caption {
+        font-size: 14px;
+        color: $color-main;
+    }
+  
+    .MuiInputBase-input {
+        color: $color-secondary !important;
+        background-color: rgba($color-secondary, 0.2);
+        border-radius: 4px;
+        border: 0;
+    }
+ 
+    .MuiSvgIcon-root {
+        color: $color-secondary !important;
+    }
   }
   

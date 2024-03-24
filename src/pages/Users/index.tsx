@@ -17,9 +17,11 @@ import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { TableIcons } from '../../utils/Assests/TableIcons'
 import './index.scss'
 
 const UsersPage: React.FC = () => {
+  const tableRef = React.createRef()
   const { users, loading, error } = useUser()
   const customers = users?.[0]?.customers
 
@@ -207,11 +209,14 @@ const UsersPage: React.FC = () => {
           ))}
         </Grid>
         <Spacer height='2rem' />
-        <div className='material-table-content'>
+        <div className='material-table'>
           <MaterialTable
+            tableRef={tableRef}
+            icons={TableIcons}
             columns={columns}
             data={customers ?? []}
             options={{
+              showFirstLastPageButtons: false,
               search: false,
               showTitle: false,
               toolbar: false,
@@ -223,6 +228,13 @@ const UsersPage: React.FC = () => {
                 fontWeight: 600,
                 fontSize: '12px',
                 color: '#545F7D'
+              }
+            }}
+            localization = {{
+              pagination: {
+                labelDisplayedRows: '{from}-{to} of {count}',
+                labelRowsPerPage: 'Showing',
+                labelRowsSelect: ''
               }
             }}
           />
