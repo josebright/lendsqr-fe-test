@@ -1,7 +1,11 @@
 import React from 'react'
 import HeaderWithSidebar from '../../components/Features/HeaderWithSidebar'
+import { useUser } from '../../Hooks/useUser'
 
 const UsersPage: React.FC = () => {
+  const { users, loading, error } = useUser()
+
+  console.log('users, loading, error', users, loading, error)
   return (
     <HeaderWithSidebar>
       <div>
