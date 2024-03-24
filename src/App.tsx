@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { makeServer } from './api/server'
 import LoginPage from './pages/Auth/loginPage'
 import UsersPage from './pages/Users'
 import NotFoundPage from './pages/NotFoundPage'
 import CircularIndeterminate from './components/Templates/PreLoader'
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#556cd6'
+    }
+  }
+})
 
 const App: React.FC = (): JSX.Element => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false)
@@ -31,6 +40,7 @@ const App: React.FC = (): JSX.Element => {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       {isLoading
         ? (
@@ -49,6 +59,7 @@ const App: React.FC = (): JSX.Element => {
           )
       }
     </Router>
+    </ThemeProvider>
   )
 }
 

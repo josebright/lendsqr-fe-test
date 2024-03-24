@@ -1,5 +1,5 @@
 export interface IUser {
-  _id: string
+  id: string
   index: number
   guid: string
   fullName: string
@@ -7,10 +7,11 @@ export interface IUser {
   profilePicture: string
   password: string
   address: string
-  users: IUserRecord[]
+  customers: IUserRecord[]
 }
 
 export interface IUserRecord {
+  id: string
   PersonalInformation: {
     fullName: string
     phoneNumber: string
