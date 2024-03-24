@@ -1,0 +1,22 @@
+@import "../../styles/index.scss";
+
+.skeleton-centered {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh;
+}
+
+.users-box {
+    padding: 5%;
+}
+
+h3 {
+    font-weight: 500;
+    font-size: 24px;
+    color: $color-secondary;
+}
+
+// .material-table-content {
+//     width: 100%;
+// }

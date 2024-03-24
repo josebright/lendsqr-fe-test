@@ -1,0 +1,25 @@
+@import "../../../styles/index.scss";
+
+.box {
+    width: 240px;
+    height: 160px;
+    border-radius: 4px;
+    border: 1px solid #213F7D0F;
+    box-shadow: 3px 5px 20px 0px #0000001A;
+    background: $color-white;
+}
+
+.sub-box {
+    padding: 20px;
+}
+
+.box-text-title {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.box-text-figure {
+    font-size: 24px;
+    font-weight: 600;
+    color: $color-secondary;
+}

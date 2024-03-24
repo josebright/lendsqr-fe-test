@@ -5,11 +5,35 @@ import MaterialTable from 'material-table'
 import HeaderWithSidebar from '../../components/Features/HeaderWithSidebar'
 import { useUser } from '../../Hooks/useUser'
 import { type IUserRecord } from '../../utils/Interfaces'
+import Spacer from '../../components/Templates/SpacerComponent'
+import BoxContainer from '../../components/Templates/BoxComponent'
+import ErrorComponent from '../../components/Templates/ErrorComponent'
+import './index.scss'
 
 const UsersPage: React.FC = () => {
   const { users, loading, error } = useUser()
+  const customers = users?.[0]?.customers
 
-  console.log('users, loading, error', users, loading, error)
+  if (loading || customers?.length < 1) {
+    return (
+      <HeaderWithSidebar>
+        <Box className="skeleton-centered">
+          <Skeleton variant="rectangular" width={210} height={118} />
+        </Box>
+      </HeaderWithSidebar>
+    )
+  }
+
+  const activeCustomersCount = customers.filter(customer => customer.Status === 'Active').length
+  const customersWithLoan = customers.filter(customer => customer.EducationAndEmployment.loanRepayment > 0).length
+  const usersWithPositiveBalanceAfterRepayment = customers.filter(customer => {
+    const loanRepayment = (customer.EducationAndEmployment?.loanRepayment ?? 0)
+    const bankAmount = (customer.Bank?.amount ?? 0) as unknown as number
+
+    return (bankAmount - loanRepayment) > 0
+  }).length
+
+  console.log('testing data', users)
 
   const columns = [
     {
@@ -62,36 +86,47 @@ const UsersPage: React.FC = () => {
     }
   ]
 
-  if (loading) {
-    return (
-      <HeaderWithSidebar>
-        <Box display="flex" justifyContent="center" alignItems="center" minHeight="100vh">
-          <Skeleton variant="rectangular" width={210} height={118} />
-        </Box>
-      </HeaderWithSidebar>
-    )
-  }
+  const summaryData = [
+    {
+      icon: 'users.svg',
+      text: 'USERS',
+      figure: customers.length
+    },
+    {
+      icon: 'active-users.svg',
+      text: 'ACTIVE USERS',
+      figure: activeCustomersCount
+    },
+    {
+      icon: 'users-with-loan.svg',
+      text: 'USERS WITH LOANS',
+      figure: customersWithLoan
+    },
+    {
+      icon: 'users-with-savings.svg',
+      text: 'USERS WITH SAVINGS',
+      figure: usersWithPositiveBalanceAfterRepayment
+    }
+  ]
 
   return (
     <HeaderWithSidebar>
-      <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
+      {error != null && <ErrorComponent errorMessage={error} />}
+      <Box className="users-box">
         <h3>Users</h3>
+        <Spacer height='2rem' />
         <Grid container spacing={2} justifyContent="center">
-          {users.map((user, index) => (
+          {summaryData.map((data, index) => (
             <Grid item xs={12} sm={6} lg={3} key={index}>
-              {/* Example content, replace with your actual data */}
-              <div>
-                <p>{user.fullName}</p>
-                {/* Add more user details here */}
-              </div>
+                <BoxContainer icon={data.icon} text={data.text} figure={data.figure} />
             </Grid>
           ))}
         </Grid>
-
-        <div>
+        <Spacer height='2rem' />
+        <div className='material-table-content'>
           <MaterialTable
             columns={columns}
-            data={users[0].customers}
+            data={customers ?? []}
             options={{
               search: false,
               showTitle: false,
@@ -107,6 +142,7 @@ const UsersPage: React.FC = () => {
           />
         </div>
 
+        <Spacer height='5rem' />
       </Box>
     </HeaderWithSidebar>
   )
