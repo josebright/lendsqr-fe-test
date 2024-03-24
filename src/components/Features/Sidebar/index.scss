@@ -3,7 +3,7 @@
 .styled-drawer {
   border: 0;
   .MuiPaper-root {
-    // position: relative;
+    position: fixed;
     margin-top: 100px;
     display: flex;
     overflow-x: hidden;

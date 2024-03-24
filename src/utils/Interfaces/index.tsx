@@ -4,6 +4,7 @@ export interface IUser {
   guid: string
   fullName: string
   email: string
+  profilePicture: string
   password: string
   address: string
   users: IUserRecord[]

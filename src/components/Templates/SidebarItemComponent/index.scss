@@ -23,22 +23,25 @@
   overflow-x: hidden;
   padding-top: 16px;
   padding-bottom: 16px;
-
-  &.active {
-    background-color: rgba($color-primary, 0.6);;
-    border-left: 3px solid;
-    padding-left: 13px;
-    color: $color-secondary;
-    border-color: rgba($color-primary, 0.6);;
-
-    .MuiListItemIcon-root {
-      color: $color-secondary;
-    }
-  }
 }
 
 .styled-link {
   text-decoration: none;
+}
+
+.item.active {
+  background-color: rgba($color-primary, 0.2);
+  border-left: 4px solid $color-primary;
+  padding-left: 13px;
+
+  .item-text {
+    color: $color-secondary;
+  }
+
+  &:hover {
+    background-color: rgba($color-primary, 0.3);
+    padding-left: 16px;
+  }
 }
 
 h6 {
