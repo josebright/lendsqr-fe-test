@@ -6,10 +6,11 @@ import './index.scss'
 interface SidebarItemProps {
   text: string
   icon: string
-  link: string
+  link?: string
+  onClick?: () => void
 }
 
-const SidebarItem: React.FC<SidebarItemProps> = ({ text, icon, link }) => {
+const SidebarItem: React.FC<SidebarItemProps> = ({ text, icon, link, onClick }) => {
   const [iconSrc, setIconSrc] = useState('')
 
   useEffect(() => {
@@ -25,16 +26,28 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ text, icon, link }) => {
     void loadIcon()
   }, [icon])
 
-  return (
-    <Link to={link} className="styled-link">
-      <ListItem button key={text} className="item">
+  const Content: React.FC = (): JSX.Element => (
+    <>
+      <ListItem button className="item" onClick={onClick}>
         <ListItemIcon className="item-icon">
           {(iconSrc.length > 0) ? <img src={iconSrc} alt={text} width='18px' /> : null}
         </ListItemIcon>
         <ListItemText primary={text} className="item-text" />
       </ListItem>
-    </Link>
+    </>
   )
+
+  return (link != null)
+    ? (
+    <Link to={link} className="styled-link">
+      <Content />
+    </Link>
+      )
+    : (
+    <div className="styled-link">
+      <Content />
+    </div>
+      )
 }
 
 export default SidebarItem

@@ -45,6 +45,7 @@ const LoginPage: React.FC<Props> = ({ onLogin }): React.ReactElement => {
               const user = await authenticateUser(values.email, values.password)
               if (user !== null && user !== undefined) {
                 onLogin(true)
+                localStorage.setItem('isLoggedIn', 'true')
                 navigate('/users')
               } else {
                 setAlert({ message: 'Incorrect Email or Password.', type: 'error' })

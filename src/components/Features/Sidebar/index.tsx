@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 import sidebarData from '../../../utils/SidebarData'
 import SidebarItem from '../../Templates/SidebarItemComponent'
 import { List, Drawer, Divider } from '@mui/material'
@@ -6,10 +7,17 @@ import './index.scss'
 import Spacer from '../../Templates/SpacerComponent'
 
 const Sidebar: React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleLogout = (): void => {
+    localStorage.removeItem('isLoggedIn')
+    navigate('/login')
+  }
+
   return (
     <Drawer className='styled-drawer' variant="permanent" anchor="left">
         <List>
-            <Spacer height='3rem' />
+            <Spacer height='1rem' />
             <SidebarItem
                 text="Switch Organization"
                 icon="briefcase-1.svg"
@@ -66,7 +74,7 @@ const Sidebar: React.FC = () => {
             <SidebarItem
                 text="Logout"
                 icon="sign-out.svg"
-                link="#"
+                onClick={() => { handleLogout() }}
             />
             <h6>v1.2.0</h6>
             <Spacer height='6rem' />

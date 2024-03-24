@@ -6,7 +6,7 @@ import './index.scss'
 
 const Header: React.FC = () => {
   return (
-    <header className="header container">
+    <header className="header">
         <div className="header-section"><img src={Logo} alt="Logo" /></div>
         <div className="header-section"><SearchBar /></div>
         <div className="header-section"><ProfileNavBar /></div>

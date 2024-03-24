@@ -9,10 +9,10 @@ interface HeaderWithSidebarProps {
 
 const HeaderWithSidebar: React.FC<HeaderWithSidebarProps> = ({ children }) => {
   return (
-    <div className="container">
+    <div>
         <Header />
         <Sidebar />
-        <main className="content">
+        <main className="container content">
             {children}
         </main>
     </div>
