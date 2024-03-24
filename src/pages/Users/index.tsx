@@ -1,18 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Grid } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
 import MaterialTable from 'material-table'
+import moment from 'moment'
 import HeaderWithSidebar from '../../components/Features/HeaderWithSidebar'
 import { useUser } from '../../Hooks/useUser'
 import { type IUserRecord } from '../../utils/Interfaces'
 import Spacer from '../../components/Templates/SpacerComponent'
 import BoxContainer from '../../components/Templates/BoxComponent'
 import ErrorComponent from '../../components/Templates/ErrorComponent'
+import FilterIcon from '../../utils/Assests/filter-results-button.svg'
+import EyeIcon from '../../utils/Assests/eye.svg'
+import BlackListIcon from '../../utils/Assests/blacklist-user.svg'
+import ActivateUserIcon from '../../utils/Assests/activate-user.svg'
+import IconButton from '@mui/material/IconButton'
+import Menu from '@mui/material/Menu'
+import MenuItem from '@mui/material/MenuItem'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
 import './index.scss'
 
 const UsersPage: React.FC = () => {
   const { users, loading, error } = useUser()
   const customers = users?.[0]?.customers
+
+  // State to manage sorting visibility
+  const [filterFormVisible, setFilterFormVisible] = useState(false)
+  const [activeColumnFilter, setActiveColumnFilter] = useState<string | null>(null)
+
+  // State for the action menu
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null)
 
   if (loading || customers?.length < 1) {
     return (
@@ -23,7 +40,7 @@ const UsersPage: React.FC = () => {
       </HeaderWithSidebar>
     )
   }
-
+  console.log('activeColumnFilter', activeColumnFilter)
   const activeCustomersCount = customers.filter(customer => customer.Status === 'Active').length
   const customersWithLoan = customers.filter(customer => customer.EducationAndEmployment.loanRepayment > 0).length
   const usersWithPositiveBalanceAfterRepayment = customers.filter(customer => {
@@ -33,58 +50,23 @@ const UsersPage: React.FC = () => {
     return (bankAmount - loanRepayment) > 0
   }).length
 
-  console.log('testing data', users)
+  const formatDate = (dateString: string): string => {
+    return moment(dateString).format('MMM D, YYYY h:mm A')
+  }
 
-  const columns = [
-    {
-      title: 'ORGANIZATION',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.OrganizationName}
-        </>
-      )
-    },
-    {
-      title: 'USERNAME',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.Username}
-        </>
-      )
-    },
-    {
-      title: 'EMAIL',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.PersonalInformation.emailAddress}
-        </>
-      )
-    },
-    {
-      title: 'PHONE NUMBER',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.PersonalInformation.phoneNumber}
-        </>
-      )
-    },
-    {
-      title: 'DATE JOINED',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.DateJoined}
-        </>
-      )
-    },
-    {
-      title: 'STATUS',
-      render: (rowData: IUserRecord) => (
-        <>
-          {rowData.Status}
-        </>
-      )
-    }
-  ]
+  const onFilterIconClick = (columnName: string): void => {
+    setActiveColumnFilter(columnName)
+    setFilterFormVisible(!filterFormVisible)
+  }
+
+  const renderColumnTitle = (title: string): JSX.Element => (
+    <div className="column-header" onClick={() => { onFilterIconClick(title) }}>
+      {title}
+      <img src={FilterIcon} alt="Filter" className="filter-icon" />
+    </div>
+  )
+
+  console.log('testing data', users)
 
   const summaryData = [
     {
@@ -107,6 +89,108 @@ const UsersPage: React.FC = () => {
       text: 'USERS WITH SAVINGS',
       figure: usersWithPositiveBalanceAfterRepayment
     }
+  ]
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, userId: string): void => {
+    setAnchorEl(event.currentTarget)
+    setCurrentUserId(userId)
+  }
+
+  const handleClose = (): void => {
+    setAnchorEl(null)
+  }
+
+  const handleViewDetails = (): void => {
+    console.log('View Details', currentUserId)
+    handleClose()
+  }
+
+  const handleBlacklistUser = (): void => {
+    console.log('Blacklist User', currentUserId)
+    handleClose()
+  }
+
+  const handleActivateUser = (): void => {
+    console.log('Activate User', currentUserId)
+    handleClose()
+  }
+
+  const actionColumn = {
+    title: '',
+    render: (rowData: IUserRecord) => (
+      <>
+        <IconButton aria-label="more" aria-controls="long-menu" aria-haspopup="true" onClick={(event) => { handleClick(event, rowData.id) }}>
+          <MoreVertIcon />
+        </IconButton>
+        <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose} className="custom-menu" PaperProps={{ elevation: 0 }}>
+          <MenuItem onClick={handleViewDetails}>
+            <img src={EyeIcon} alt="Filter" className="menu-icon" />
+            View Details
+          </MenuItem>
+          <MenuItem onClick={handleBlacklistUser}>
+          <img src={BlackListIcon} alt="Filter" className="menu-icon" />
+            Blacklist User
+          </MenuItem>
+          <MenuItem onClick={handleActivateUser}>
+            <img src={ActivateUserIcon} alt="Filter" className="menu-icon" />
+            Activate User
+          </MenuItem>
+        </Menu>
+      </>
+    )
+  }
+
+  const columns = [
+    {
+      title: renderColumnTitle('ORGANIZATION'),
+      width: '15%',
+      render: (rowData: IUserRecord) => (
+        <div className='typography'>
+          {rowData.OrganizationName}
+        </div>
+      )
+    },
+    {
+      title: renderColumnTitle('USERNAME'),
+      render: (rowData: IUserRecord) => (
+        <div className='typography'>
+          {rowData.Username}
+        </div>
+      )
+    },
+    {
+      title: renderColumnTitle('EMAIL'),
+      render: (rowData: IUserRecord) => (
+        <div className='typography'>
+          {rowData.PersonalInformation.emailAddress}
+        </div>
+      )
+    },
+    {
+      title: renderColumnTitle('PHONE NUMBER'),
+      render: (rowData: IUserRecord) => (
+        <div className='typography'>
+          {rowData.PersonalInformation.phoneNumber}
+        </div>
+      )
+    },
+    {
+      title: renderColumnTitle('DATE JOINED'),
+      render: (rowData: IUserRecord) => (
+        <div className='typography'>
+          {formatDate(rowData.DateJoined)}
+        </div>
+      )
+    },
+    {
+      title: renderColumnTitle('STATUS'),
+      render: (rowData: IUserRecord) => (
+        <div className={`status ${rowData.Status.toLowerCase()}`}>
+          {rowData.Status}
+        </div>
+      )
+    },
+    actionColumn
   ]
 
   return (
@@ -136,14 +220,16 @@ const UsersPage: React.FC = () => {
               pageSize: 20,
               pageSizeOptions: [20, 50, 100],
               headerStyle: {
-                fontWeight: 200
+                fontWeight: 600,
+                fontSize: '12px',
+                color: '#545F7D'
               }
             }}
           />
         </div>
-
         <Spacer height='5rem' />
       </Box>
+      {filterFormVisible && <div> {/* Your form/navBar component here, use activeColumnFilter for specific logic */} </div>}
     </HeaderWithSidebar>
   )
 }

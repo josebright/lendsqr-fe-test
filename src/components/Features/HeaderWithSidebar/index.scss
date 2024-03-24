@@ -1,10 +1,14 @@
 @import "../../../styles/index.scss";
 
 .content {
-    height: 85vh;
+    height: 100%;
     padding-top: 15vh;
-    padding-left: 20%;
+    padding-left: 285px;
     z-index: 50;
     background-color: $color-off-white;
+
+    @include respond-to(sm) {
+        padding-left: 80px;
+    }
 }
   

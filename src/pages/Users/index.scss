@@ -17,6 +17,64 @@ h3 {
     color: $color-secondary;
 }
 
-// .material-table-content {
-//     width: 100%;
-// }
+.typography {
+    font-size: 12px;
+    font-weight: 400;
+    color: $color-main;
+}
+
+.status {
+    font-size: 12px;
+    font-weight: 400;
+    border-radius: 100px;
+    padding: 5px;
+    color: $color-main;
+    text-align: center;
+    
+    &.inactive {
+      background-color: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+    
+    &.pending {
+      background-color: rgba($color-warning, 0.1);
+      color: $color-warning;
+    }
+    
+    &.active {
+      background-color: rgba($color-success, 0.1);
+      color: $color-success;
+    }
+    
+    &.blacklisted {
+      background-color: rgba($color-danger, 0.1);
+      color: $color-danger;
+    }
+  }
+  
+
+.column-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  
+    .filter-icon {
+      margin-left: 5px;
+      width: 20px;
+      height: 20px;
+    }
+}
+
+.menu-icon {
+    height: 18px;
+    padding-right: 10px;
+    color: $color-main;
+}
+
+.custom-menu .MuiPaper-root {
+    color: $color-main;
+    width: 180px !important;
+    border-radius: 4px !important;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.04) !important;
+  }
+  
