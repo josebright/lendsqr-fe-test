@@ -1,8 +1,12 @@
 import React, { useState } from 'react'
-import { Box, Grid } from '@mui/material'
 import Skeleton from '@mui/material/Skeleton'
 import MaterialTable from 'material-table'
 import moment from 'moment'
+import { Box, TextField, Button, Select, MenuItem, FormControl, InputLabel, Grid } from '@mui/material'
+import { DemoContainer } from '@mui/x-date-pickers/internals/demo'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider'
+import { DatePicker } from '@mui/x-date-pickers/DatePicker'
 import HeaderWithSidebar from '../../components/Features/HeaderWithSidebar'
 import { useUser } from '../../Hooks/useUser'
 import { type IUserRecord } from '../../utils/Interfaces'
@@ -15,9 +19,9 @@ import BlackListIcon from '../../utils/Assests/blacklist-user.svg'
 import ActivateUserIcon from '../../utils/Assests/activate-user.svg'
 import IconButton from '@mui/material/IconButton'
 import Menu from '@mui/material/Menu'
-import MenuItem from '@mui/material/MenuItem'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { TableIcons } from '../../utils/Assests/TableIcons'
+import Popover from '@mui/material/Popover'
 import './index.scss'
 
 const UsersPage: React.FC = () => {
@@ -26,8 +30,7 @@ const UsersPage: React.FC = () => {
   const customers = users?.[0]?.customers
 
   // State to manage sorting visibility
-  const [filterFormVisible, setFilterFormVisible] = useState(false)
-  const [activeColumnFilter, setActiveColumnFilter] = useState<string | null>(null)
+  const [filterAnchorEl, setFilterAnchorEl] = React.useState<HTMLElement | null>(null)
 
   // State for the action menu
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -42,7 +45,7 @@ const UsersPage: React.FC = () => {
       </HeaderWithSidebar>
     )
   }
-  console.log('activeColumnFilter', activeColumnFilter)
+
   const activeCustomersCount = customers.filter(customer => customer.Status === 'Active').length
   const customersWithLoan = customers.filter(customer => customer.EducationAndEmployment.loanRepayment > 0).length
   const usersWithPositiveBalanceAfterRepayment = customers.filter(customer => {
@@ -56,19 +59,20 @@ const UsersPage: React.FC = () => {
     return moment(dateString).format('MMM D, YYYY h:mm A')
   }
 
-  const onFilterIconClick = (columnName: string): void => {
-    setActiveColumnFilter(columnName)
-    setFilterFormVisible(!filterFormVisible)
+  const handleFilterClick = (event: React.MouseEvent<HTMLElement>): void => {
+    setFilterAnchorEl(event.currentTarget)
+  }
+
+  const handleFilterClose = (): void => {
+    setFilterAnchorEl(null)
   }
 
   const renderColumnTitle = (title: string): JSX.Element => (
-    <div className="column-header" onClick={() => { onFilterIconClick(title) }}>
+    <div className="column-header" onClick={handleFilterClick}>
       {title}
       <img src={FilterIcon} alt="Filter" className="filter-icon" />
     </div>
   )
-
-  console.log('testing data', users)
 
   const summaryData = [
     {
@@ -241,7 +245,71 @@ const UsersPage: React.FC = () => {
         </div>
         <Spacer height='5rem' />
       </Box>
-      {filterFormVisible && <div> {/* Your form/navBar component here, use activeColumnFilter for specific logic */} </div>}
+      <Popover
+        id="filter-form-popover"
+        open={Boolean(filterAnchorEl)}
+        anchorEl={filterAnchorEl}
+        onClose={handleFilterClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left'
+        }}
+      >
+        <div className="filter-form">
+          <div className="filter-subform">
+
+            <div className='form-typography'>
+              Organization
+            </div>
+            <FormControl fullWidth>
+              <InputLabel>Select</InputLabel>
+              <Select defaultValue="" label="Organization">
+                <MenuItem value="org1">Org 1</MenuItem>
+                <MenuItem value="org2">Org 2</MenuItem>
+              </Select>
+            </FormControl>
+
+            <div className='form-typography'>
+              Username
+            </div>
+            <TextField fullWidth label="User" variant="outlined" />
+
+            <div className='form-typography'>
+              Email
+            </div>
+            <TextField fullWidth label="Email" variant="outlined" />
+
+            <div className='form-typography'>
+              Date
+            </div>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DatePicker']}>
+                <DatePicker label="Date" />
+              </DemoContainer>
+            </LocalizationProvider>
+
+            <div className='form-typography'>
+              Phone Number
+            </div>
+            <TextField fullWidth label="Phone Number" variant="outlined" />
+
+            <div className='form-typography'>
+              Status
+            </div>
+            <FormControl fullWidth>
+              <InputLabel>Status</InputLabel>
+              <Select defaultValue="" label="Status">
+                <MenuItem value="active">Active</MenuItem>
+                <MenuItem value="inactive">Inactive</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <div className='buttons'>
+              <Button variant="outlined" onClick={handleFilterClose}>Reset</Button>
+              <Button variant="contained" className='filter-button'>Filter</Button>
+          </div>
+        </div>
+      </Popover>
     </HeaderWithSidebar>
   )
 }
