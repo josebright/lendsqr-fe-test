@@ -47,6 +47,11 @@
 }
 
 .menu {
+    z-index: 600;
     cursor: pointer;
+
+    .menuItem{
+        color: $color-main;
+    }
 }
   

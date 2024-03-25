@@ -4,6 +4,7 @@
   border: 0;
   .MuiPaper-root {
     position: fixed;
+    z-index: 300;
     margin-top: 100px;
     display: flex;
     overflow-x: hidden;

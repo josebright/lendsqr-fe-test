@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { Avatar, IconButton, Menu, Skeleton } from '@mui/material'
+import { useNavigate, Link } from 'react-router-dom'
+import { Avatar, IconButton, Menu, Skeleton, MenuItem } from '@mui/material'
 import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import { useUser } from '../../../Hooks/useUser'
@@ -13,12 +13,18 @@ const ProfileNavBar: React.FC = () => {
   const open = Boolean(anchorEl)
   const { users, loading, error } = useUser()
 
+  const navigate = useNavigate()
+
   const handleClick = (event: React.MouseEvent<HTMLElement>): void => {
     setAnchorEl(event.currentTarget)
   }
 
   const handleClose = (): void => {
     setAnchorEl(null)
+  }
+  const handleLogOut = (): void => {
+    localStorage.removeItem('isLoggedIn')
+    navigate('/login')
   }
 
   return (
@@ -50,8 +56,8 @@ const ProfileNavBar: React.FC = () => {
                   onClose={handleClose}
                   className="menu"
               >
-                  {/* <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={handleClose}>Logout</MenuItem> */}
+                  <MenuItem className='menuItem' onClick={handleClose}>Profile</MenuItem>
+                  <MenuItem className='menuItem' onClick={handleLogOut}>Logout</MenuItem>
               </Menu>
             </>
           )
