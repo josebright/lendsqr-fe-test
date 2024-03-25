@@ -1,7 +1,7 @@
 import { createServer, Model } from 'miragejs'
 import data from '../utils/MockAPIs/database.json'
 
-export function makeServer ({ environment = 'development' } = {}): void {
+export function makeServer ({ environment = 'production' } = {}): void {
   createServer({
     environment,
     models: {
