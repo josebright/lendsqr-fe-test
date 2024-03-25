@@ -22,6 +22,7 @@ import Menu from '@mui/material/Menu'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import { TableIcons } from '../../utils/Assests/TableIcons'
 import Popover from '@mui/material/Popover'
+import UserDetails from './UserDetails'
 import './index.scss'
 
 const UsersPage: React.FC = () => {
@@ -35,6 +36,9 @@ const UsersPage: React.FC = () => {
   // State for the action menu
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const [currentUserId, setCurrentUserId] = useState<string | null>(null)
+
+  // State to manage selected user for details view
+  const [selectedUser, setSelectedUser] = useState<IUserRecord | null>(null)
 
   if (loading || customers?.length < 1) {
     return (
@@ -107,7 +111,12 @@ const UsersPage: React.FC = () => {
   }
 
   const handleViewDetails = (): void => {
-    console.log('View Details', currentUserId)
+    if (currentUserId !== null) {
+      const user = customers.find((customer) => customer.id === currentUserId)
+      if (user !== undefined) {
+        setSelectedUser(user)
+      }
+    }
     handleClose()
   }
 
@@ -122,7 +131,6 @@ const UsersPage: React.FC = () => {
   }
 
   const actionColumn = {
-    title: '',
     render: (rowData: IUserRecord) => (
       <>
         <IconButton aria-label="more" aria-controls="long-menu" aria-haspopup="true" onClick={(event) => { handleClick(event, rowData.id) }}>
@@ -198,6 +206,10 @@ const UsersPage: React.FC = () => {
     },
     actionColumn
   ]
+
+  if (selectedUser !== null) {
+    return <UserDetails user={selectedUser} onBack={() => { setSelectedUser(null) }} />
+  }
 
   return (
     <HeaderWithSidebar>
