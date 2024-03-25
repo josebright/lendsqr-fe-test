@@ -20,7 +20,7 @@ const App: React.FC = (): JSX.Element => {
   const [isLoading, setIsLoading] = useState<boolean>(true)
 
   useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
+    if (process.env.NODE_ENV === 'production') {
       makeServer()
     }
 
