@@ -263,7 +263,7 @@ const UsersPage: React.FC = () => {
             </div>
             <FormControl fullWidth>
               <InputLabel>Select</InputLabel>
-              <Select defaultValue="" label="Organization">
+              <Select defaultValue="" label="Select">
                 <MenuItem value="org1">Org 1</MenuItem>
                 <MenuItem value="org2">Org 2</MenuItem>
               </Select>
@@ -279,7 +279,7 @@ const UsersPage: React.FC = () => {
             </div>
             <TextField fullWidth label="Email" variant="outlined" />
 
-            <div className='form-typography'>
+            <div className='date-form-typography'>
               Date
             </div>
             <LocalizationProvider dateAdapter={AdapterDayjs}>

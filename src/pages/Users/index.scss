@@ -108,7 +108,7 @@ h3 {
 
   .filter-form {
     width: 270px;
-    height: 650px;
+    height: 580px;
     background: $color-white;
     box-shadow: 3px 5px 20px 0px #0000001A;
 
@@ -121,22 +121,29 @@ h3 {
         font-size: 14px;
         font-weight: 500;
         padding-left: 20px;
-        padding-bottom: 5px;
+        padding-bottom: 10px;
+      }
+      .date-form-typography {
+        color: $color-main;
+        font-size: 14px;
+        font-weight: 500;
+        padding-left: 20px;
+        // padding-bottom: 5px;
       }
     
       .MuiFormControl-root, .MuiTextField-root, .MuiButtonBase-root {
         width: 230px;
-        // height: 40px;
         margin-bottom: 10px;
         margin-left: 20px;
-  
-        &:focus {
-          border-color: rgba($color-main, 0.4);
-          outline: none;
+
+        .MuiInputBase-input, .MuiOutlinedInput-input {
+          color: rgba($color-main, 0.6);
+          padding: 10px !important;
+          border-radius: 8px !important;
         }
   
-        &:hover {
-          outline: none;
+        .MuiInputBase-root {
+          border-radius: 8px !important;
         }
       }
 
@@ -148,16 +155,9 @@ h3 {
         color: rgba($color-secondary, 0.6);
       }
   
-      .MuiInputBase-input, .MuiSelect-select {
-        color: rgba($color-main, 0.6);
-        border: 0;
-
-        border-radius: 8px;
-        // height: 5px;
-      }
-  
       .MuiInputLabel-root {
         color: rgba($color-secondary, 0.6);
+        top: -6px;
       }
     }
 
